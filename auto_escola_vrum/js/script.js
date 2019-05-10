@@ -2,7 +2,21 @@
 var httpRequest; //variavel para o ajax funcionar
 var jogador;
 var vetor_de_jogadores = [];
-
+jogador = {
+    'nome': 'Mateus',
+    'pontos' : 20
+};
+vetor_de_jogadores[0] = jogador;
+jogador = {
+    'nome': 'Geraldo',
+    'pontos' : 40
+};
+vetor_de_jogadores[1] = jogador;
+jogador = {
+    'nome': 'Outro Nick',
+    'pontos' : 200
+};
+vetor_de_jogadores[2] = jogador;
 //verifico a compatibilidade com os navegadores para se executar o ajax
 if (window.XMLHttpRequest){
     httpRequest = new XMLHttpRequest();
@@ -32,5 +46,9 @@ function carregar_pontos(){
     }
     else{
         document.getElementById("pontuacoes_h1").innerHTML = "Últimas pontuações";
+        for(var i = 0; i <= vetor_de_jogadores.length; i++){
+            var conteudo = document.getElementById("lista_pontuacoes").innerHTML;
+            document.getElementById("lista_pontuacoes").innerHTML = conteudo + '<li class="pontuacao_item item'+ (i + 1) +'"' + '>' + vetor_de_jogadores[i].nome + ' ' + vetor_de_jogadores[i].pontos + '</li>';
+        }
     }
 }
