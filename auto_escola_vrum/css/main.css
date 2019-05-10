@@ -26,17 +26,19 @@ nav {
     height: 63px;
     width: 100%;
     background-color: #ffee1e;
+    min-width: 360px;
 }
 
-ul {
+.lista_menu {
     display: flex;
     flex-wrap: wrap;
 }
 
-li {
+.menu_item {
     font-size: 1.5em;
     color: #00000e;
     height: 63px;
+    width: 120px;
     margin-right: 10px;
     padding: 10px;
     display: flex;
@@ -55,7 +57,56 @@ footer {
     display: flex;
     flex-wrap: wrap;
 }
-
+/* Classes e ids referentes as possíveis trocas com o AJAX */
 .container {
+
+}
+
+.container_home {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pontuacoes {
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: column;
+    flex-grow: 1;
+}
+
+.pub_simulado {
     
+}
+
+#pontuacoes_h1 {
+    font-size: 1.5em;
+    margin-top: 10px;
+    margin-left: 20px;
+    font-weight: 400;
+}
+
+.lista_pontuacoes {
+
+}
+
+.pontuacao_item {
+    color: #00000e;
+    font-size: 1.5em;
+    padding: 10px;
+    margin: 2px;
+    margin-left: 10px;
+}
+
+.item1 {
+    background-color: #fbe2e4;
+}
+
+.item2 {
+    background-color: #fff7dc;
+}
+
+.item3 {
+    background-color: #e1f2e5;
+    margin-bottom: 10px;
 }
