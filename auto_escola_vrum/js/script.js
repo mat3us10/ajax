@@ -96,7 +96,7 @@ function carregar_jogo() {
 function carregar_lista_jogadores() {
     httpRequest.open('GET', './arquivos/listagem_jogadores.html', true);
     httpRequest.send(null);
-    setTimeout(carregar_jogadores, 50);
+    setTimeout(carregar_jogadores, 100);
 }
 
 function carregar_login() {
@@ -112,10 +112,29 @@ function login() {
     } else {
         for (var i = 0; i < vetor_de_jogadores.length; i++) {
             if (vetor_de_jogadores[i].email == user_mail && vetor_de_jogadores[i].senha == user_password) {
-                alert('parabens voce digitou certo');
-            } else {
-                alert('entrou no else');
+                document.getElementById('input_form').innerHTML = '<input class="input_cadastro" id="user_name" type="text" placeholder="novo nome">' +
+                 '<input class="input_cadastro" id="user_password" type="text" placeholder="nova senha">'+
+                 '<input class="input_cadastro" id="user_mail" type="text" placeholder="novo email">'+
+                 '<input class="button_cadastro" onclick="editar_dados('+ i + ')" value="Editar">';
+            } 
+            else {
+                document.getElementById('status').innerHTML = '<div id="error">dados incorretos</div>';
             }
         }
+    }
+}
+
+//funcao para editar os dados
+function editar_dados(indice) {
+    let user_name = document.getElementById('user_name').value;
+    let user_password = document.getElementById('user_password').value;
+    let user_mail = document.getElementById('user_mail').value;
+    if (user_name.length == 0 || user_password.length == 0 || user_mail.length == 0) {
+        document.getElementById('status').innerHTML = '<div id="error">dados invalidos</div>';
+    } else {
+        vetor_de_jogadores[indice].nome = user_name;
+        vetor_de_jogadores[indice].senha = user_password;
+        vetor_de_jogadores[indice].email = user_mail;
+        document.getElementById('status').innerHTML = '<div id="correct">dados atualizados</div>';
     }
 }

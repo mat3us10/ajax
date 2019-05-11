@@ -217,7 +217,7 @@ footer {
     color :white;
     background-color: #00000e;
     border: none;
-    margin: 10px;
+    margin-bottom: 10px;
     font-size: 1.5em;
     text-align: center;
     cursor: pointer;
@@ -242,3 +242,34 @@ footer {
     font-weight: 400;
     width: 600px;
 }
+
+#error {
+    background-color: #eb1e1e;
+    color: white;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    padding: 8px;
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
+
+#error:active {
+    transition-duration: 0.5s;
+    transform: scale(0.80);
+}
+
+#correct {
+    background-color: #1ce057;
+    color: white;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    padding: 8px;
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
+
+#correct:active {
+    transition-duration: 0.5s;
+    transform: scale(0.80);
+}
+
