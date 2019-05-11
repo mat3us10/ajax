@@ -96,6 +96,7 @@ footer {
     padding: 10px;
     margin: 5px;
     border-radius: 2px;
+    cursor: pointer;
 }
 
 .item1 {
@@ -138,6 +139,7 @@ footer {
     font-size: 1.5em;
     margin-top: 10px;
     margin-left: 20px;
+    margin-bottom: 10px;
     font-weight: 400;
 }
 
@@ -148,6 +150,7 @@ footer {
     margin: 10px;
     margin-left: 10px;
     border-radius: 2px;
+    cursor: pointer;
 }
 
 #lista_jogadores {
@@ -247,6 +250,7 @@ footer {
     background-color: #eb1e1e;
     color: white;
     font-size: 1.2em;
+    border-radius: 2px;
     margin-bottom: 10px;
     padding: 8px;
     transition-duration: 0.5s;
@@ -262,6 +266,7 @@ footer {
     background-color: #1ce057;
     color: white;
     font-size: 1.2em;
+    border-radius: 2px;
     margin-bottom: 10px;
     padding: 8px;
     transition-duration: 0.5s;
@@ -269,6 +274,25 @@ footer {
 }
 
 #correct:active {
+    transition-duration: 0.5s;
+    transform: scale(0.80);
+}
+
+#delete {
+    background-color: #eb1e1e;
+    color: white;
+    width: 100px;
+    font-size: 1.5em;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    padding: 8px;
+    transition-duration: 0.5s;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+}
+
+#delete:active {
     transition-duration: 0.5s;
     transform: scale(0.80);
 }

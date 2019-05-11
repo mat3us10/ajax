@@ -115,7 +115,8 @@ function login() {
                 document.getElementById('input_form').innerHTML = '<input class="input_cadastro" id="user_name" type="text" placeholder="novo nome">' +
                  '<input class="input_cadastro" id="user_password" type="text" placeholder="nova senha">'+
                  '<input class="input_cadastro" id="user_mail" type="text" placeholder="novo email">'+
-                 '<input class="button_cadastro" onclick="editar_dados('+ i + ')" value="Editar">';
+                 '<input class="button_cadastro" onclick="editar_dados('+ i + ')" value="editar">' + 
+                 '<input id="delete" onclick="deletar_jogador('+ i + ')" value="deletar">';
             } 
             else {
                 document.getElementById('status').innerHTML = '<div id="error">dados incorretos</div>';
@@ -137,4 +138,10 @@ function editar_dados(indice) {
         vetor_de_jogadores[indice].email = user_mail;
         document.getElementById('status').innerHTML = '<div id="correct">dados atualizados</div>';
     }
+}
+
+//funcao para deletar um jogador
+function deletar_jogador(indice) {
+    vetor_de_jogadores.pop(indice);
+    document.getElementById('status').innerHTML = '<div id="correct">jogador deletado</div>';
 }
