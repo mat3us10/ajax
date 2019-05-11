@@ -44,6 +44,7 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 #item1 {
@@ -57,14 +58,15 @@ footer {
     display: flex;
     flex-wrap: wrap;
 }
-/* Classes e ids referentes as possíveis trocas com o AJAX */
 .container {
-
 }
+/* Classes e ids referentes as possíveis trocas com o AJAX */
 
+/*HOME*/
 .container_home {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .pontuacoes {
@@ -107,5 +109,111 @@ footer {
 
 .item3 {
     background-color: #e1f2e5;
+}
+
+.item_n {
+    background-color: #fff68e;
     margin-bottom: 10px;
+}
+
+/*CADASTRO E LISTAGEM*/
+.listagem_cadastro {
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: column;
+    flex-grow: 1;
+    margin: 10px auto;
+    width: 600px;
+    min-width: 360px;
+}
+.cabecalho {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#listagem_h1 {
+    font-size: 1.5em;
+    margin-top: 10px;
+    margin-left: 20px;
+    font-weight: 400;
+}
+
+.lista_pontuacao_item{
+    color: #00000e;
+    font-size: 1.5em;
+    padding: 10px;
+    margin: 10px;
+    margin-left: 10px;
+}
+
+#lista_jogadores {
+
+}
+
+.button_cadastro_list {
+    width: 150px;
+    height: 34px;
+    color :white;
+    background-color: #00000e;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/*CADASTRO*/
+.cadastro {
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+    width: 600px;
+    min-width: 360px;
+}
+
+#cadastro_h1 {
+    font-size: 1.5em;
+    margin-top: 10px;
+    margin-left: 20px;
+    font-weight: 400;
+    width: 600px;
+}
+
+.img_usuario {
+    height: 120px;
+}
+
+.formulario {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#input_cadastro {
+    height: 40px;
+    width: 300px;
+    background-color: #fff68e;
+    border: none;
+    margin: 10px;
+    font-size: 1.5em;
+    padding: 10px;
+    text-align: center;
+}
+
+.button_cadastro {
+    width: 100px;
+    height: 40px;
+    color :white;
+    background-color: #00000e;
+    border: none;
+    margin: 10px;
+    font-size: 1.5em;
+    text-align: center;
+    cursor: pointer;
 }
