@@ -38,7 +38,6 @@ nav {
     font-size: 1.5em;
     color: #00000e;
     height: 63px;
-    width: 120px;
     margin-right: 10px;
     padding: 10px;
     display: flex;
@@ -83,7 +82,7 @@ footer {
 #pontuacoes_h1 {
     font-size: 1.5em;
     margin-top: 10px;
-    margin-left: 20px;
+    margin-left: 10px;
     font-weight: 400;
 }
 
@@ -95,8 +94,8 @@ footer {
     color: #00000e;
     font-size: 1.5em;
     padding: 10px;
-    margin: 2px;
-    margin-left: 10px;
+    margin: 5px;
+    border-radius: 2px;
 }
 
 .item1 {
@@ -126,6 +125,7 @@ footer {
     margin: 10px auto;
     width: 600px;
     min-width: 360px;
+    border-radius: 2px;
 }
 .cabecalho {
     display: flex;
@@ -147,6 +147,7 @@ footer {
     padding: 10px;
     margin: 10px;
     margin-left: 10px;
+    border-radius: 2px;
 }
 
 #lista_jogadores {
@@ -161,6 +162,8 @@ footer {
     border: none;
     font-size: 1.5em;
     cursor: pointer;
+    border-radius: 2px;
+    margin: 5px;
 }
 
 /*CADASTRO*/
@@ -174,6 +177,7 @@ footer {
     margin: 10px auto;
     width: 600px;
     min-width: 360px;
+    border-radius: 2px;
 }
 
 #cadastro_h1 {
@@ -195,7 +199,7 @@ footer {
     align-items: center;
 }
 
-#input_cadastro {
+.input_cadastro {
     height: 40px;
     width: 300px;
     background-color: #fff68e;
@@ -204,6 +208,7 @@ footer {
     font-size: 1.5em;
     padding: 10px;
     text-align: center;
+    border-radius: 2px;
 }
 
 .button_cadastro {
@@ -216,4 +221,24 @@ footer {
     font-size: 1.5em;
     text-align: center;
     cursor: pointer;
+    border-radius: 2px;
+    transition-duration: 0.5s;
+}
+
+.button_cadastro:active {
+    transform: scale(0.80);
+    transition-duration: 0.5s;
+}
+
+.cabecalho_cadastrar {
+    text-align: center;
+}
+
+/*LOGIN*/
+#login_h1 {
+    font-size: 1.5em;
+    margin-top: 10px;
+    margin-left: 20px;
+    font-weight: 400;
+    width: 600px;
 }

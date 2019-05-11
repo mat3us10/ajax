@@ -1,10 +1,11 @@
 <div class="cadastro">
-    <div class="cabecalho">
+    <div class="cabecalho_cadastrar">
         <h1 id="cadastro_h1">Cadastro de um jogador</h1>            
     </div>
-    <img class="img_usuario" src="./icons/man-user.svg" alt="imagem_de_um_usuario">
     <form class="formulario" method="GET">
-        <input id="input_cadastro" type="text" placeholder="digite o seu nome">
+        <input class="input_cadastro" id="user_name" type="text" placeholder="digite o seu nome">
+        <input class="input_cadastro" id="user_password" type="password" placeholder="digite sua senha">
+        <input class="input_cadastro" id="user_mail" type="text" placeholder="digite o seu endereco">
         <input class="button_cadastro" onclick="enviar_dados()" value="Enviar">
     </form>
 </div>
