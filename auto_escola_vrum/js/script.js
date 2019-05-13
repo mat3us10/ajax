@@ -120,7 +120,7 @@ function enviar_dados(parametro) {
                 'desc': per_desc,
                 'resp': per_resp,
                 'opcoes': [opcoes[0], opcoes[1], opcoes[2], opcoes[3]
-                ]
+                ],
             };
             vetor_de_perguntas.push(pergunta);
         }
@@ -129,8 +129,28 @@ function enviar_dados(parametro) {
 }
 
 //funcao para carregar o jogo
-function carregar_jogo() {
+function carregar_jogo(indice) {
+    httpRequest.open('GET', './arquivos/simulado.html', true);
+    httpRequest.send(null);
+    vetor_de_jogadores[indice].pontos = 0;
+    setTimeout(() => {
+        for(var i = 0; i < vetor_de_perguntas.length; i++){
+            document.getElementById('cabecalho_h1').innerHTML = vetor_de_perguntas[i].titulo;
+            document.getElementById('cabecalho_p').innerHTML = vetor_de_perguntas[i].desc;
+            for(var j = 0; j < vetor_de_perguntas[i].opcoes.length; j++){
+                conteudo = document.getElementById('opcoes').innerHTML;
+                document.getElementById('opcoes').innerHTML = conteudo + '<a onclick="(verifica('+ i + ',' + j + ',' + indice + '))"> <div class="opcao" id="opcao1">'+
+                '<p>' + vetor_de_perguntas[i].opcoes[j] + '</p> </div> </a>'
+            }
+        }
+    }, 50);
+}
 
+//funcao para verificar se o usuario acertou ou nao
+function verifica(j, i, indice){
+    if(vetor_de_perguntas[i].resp = vetor_de_perguntas[i].opcoes[j]){
+        vetor_de_jogadores[indice].pontos = vetor_de_jogadores[indice].pontos + 5;
+    }
 }
 
 //funcao para carregar a lista de jogadores
@@ -195,7 +215,13 @@ function login(parametro) {
                 }
             }
         } else if (parametro == 1) {
-            carregar_jogo();
+            for (var i = 0; i < vetor_de_jogadores.length; i++) {
+                if (vetor_de_jogadores[i].email == user_mail && vetor_de_jogadores[i].senha == user_password) {
+                    carregar_jogo(i);
+                } else {
+                    document.getElementById('status').innerHTML = '<div id="error">dados incorretos</div>';
+                }
+            }
         }
     }
 }
