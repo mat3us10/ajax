@@ -32,7 +32,7 @@ function carregar_pontos() {
         for (var i = 0; i <= vetor_de_jogadores.length; i++) {
             var conteudo = document.getElementById("lista_pontuacoes").innerHTML;
             if (i < 3) {
-                document.getElementById("lista_pontuacoes").innerHTML = conteudo + '<li class="pontuacao_item item' + (i + 1) + '"' + ' onclick="carregar_login" >' + vetor_de_jogadores[i].nome + ' ' + vetor_de_jogadores[i].pontos + '</li>';
+                document.getElementById("lista_pontuacoes").innerHTML = conteudo + '<li class="pontuacao_item item' + (i + 1) + '"' + ' onclick="carregar_login()" >' + vetor_de_jogadores[i].nome + ' ' + vetor_de_jogadores[i].pontos + '</li>';
             } else {
                 console.log('entrou no else');
                 document.getElementById("lista_pontuacoes").innerHTML = conteudo + '<li class="lista_pontuacao_item item_n" onclick="carregar_login()">' + vetor_de_jogadores[i].nome + '</li>';
@@ -44,21 +44,33 @@ function carregar_pontos() {
 function carregar_simulado() {
     httpRequest.open('GET', './arquivos/lista_de_jogadores.html', true);
     httpRequest.send(null);
-    setTimeout(carregar_jogadores, 50);
+    setTimeout(carregar_jogadores, 50, [0]); //0 para iniciar jogo
 }
 
 //funcao para carregar os jogadores
-function carregar_jogadores() {
+function carregar_jogadores(parametro) {
     if (vetor_de_jogadores.length == 0) {
         document.getElementById("listagem_h1").innerHTML = 'Sem cadastro de jogadores';
     } else {
         document.getElementById("listagem_h1").innerHTML = 'Jogadores já cadastrados';
-        for (var i = 0; i <= vetor_de_jogadores.length; i++) {
-            var conteudo = document.getElementById("lista_jogadores").innerHTML;
-            if (i < 3) {
-                document.getElementById("lista_jogadores").innerHTML = conteudo + '<li class="lista_pontuacao_item item' + (i + 1) + '"' + ' onclick="carregar_login()" >' + vetor_de_jogadores[i].nome + '</li>';
-            } else {
-                document.getElementById("lista_jogadores").innerHTML = conteudo + '<li class="lista_pontuacao_item item_n" onclick="carregar_login()">' + vetor_de_jogadores[i].nome + '</li>';
+        if(parametro == 0){
+            for (var i = 0; i <= vetor_de_jogadores.length; i++) {
+                var conteudo = document.getElementById("lista_jogadores").innerHTML;
+                if (i < 3) {
+                    document.getElementById("lista_jogadores").innerHTML = conteudo + '<li class="lista_pontuacao_item item' + (i + 1) + '"' + ' onclick="carregar_jogo()" >' + vetor_de_jogadores[i].nome + '</li>';
+                } else {
+                    document.getElementById("lista_jogadores").innerHTML = conteudo + '<li class="lista_pontuacao_item item_n" onclick="carregar_jogo()">' + vetor_de_jogadores[i].nome + '</li>';
+                }
+            }
+        }
+        else if(parametro == 1){
+            for (var i = 0; i <= vetor_de_jogadores.length; i++) {
+                var conteudo = document.getElementById("lista_jogadores").innerHTML;
+                if (i < 3) {
+                    document.getElementById("lista_jogadores").innerHTML = conteudo + '<li class="lista_pontuacao_item item' + (i + 1) + '"' + ' onclick="carregar_login()" >' + vetor_de_jogadores[i].nome + '</li>';
+                } else {
+                    document.getElementById("lista_jogadores").innerHTML = conteudo + '<li class="lista_pontuacao_item item_n" onclick="carregar_login()">' + vetor_de_jogadores[i].nome + '</li>';
+                }
             }
         }
     }
@@ -96,7 +108,7 @@ function carregar_jogo() {
 function carregar_lista_jogadores() {
     httpRequest.open('GET', './arquivos/listagem_jogadores.html', true);
     httpRequest.send(null);
-    setTimeout(carregar_jogadores, 100);
+    setTimeout(carregar_jogadores, 50, [1]); //1 para carregar o login
 }
 
 function carregar_login() {
@@ -112,6 +124,7 @@ function login() {
     } else {
         for (var i = 0; i < vetor_de_jogadores.length; i++) {
             if (vetor_de_jogadores[i].email == user_mail && vetor_de_jogadores[i].senha == user_password) {
+                document.getElementById('login_h1').innerHTML = 'Edicao de dados';
                 document.getElementById('input_form').innerHTML = '<input class="input_cadastro" id="user_name" type="text" placeholder="novo nome">' +
                  '<input class="input_cadastro" id="user_password" type="text" placeholder="nova senha">'+
                  '<input class="input_cadastro" id="user_mail" type="text" placeholder="novo email">'+
