@@ -266,7 +266,6 @@ function editar_dados_perguntas(indice) {
             vetor_de_perguntas[indice].opcoes[2] = per_opcoes[2];
             vetor_de_perguntas[indice].opcoes[3] = per_opcoes[3]; 
         }
-    console.log(vetor_de_perguntas[indice]);
     carregar_home();
 }
 
@@ -274,4 +273,10 @@ function editar_dados_perguntas(indice) {
 function deletar_jogador(indice) {
     vetor_de_jogadores.pop(indice);
     document.getElementById('status').innerHTML = '<div id="correct">jogador deletado</div>';
+}
+
+//funcao para deletar uma pergunta
+function deletar_pergunta(indice) {
+    vetor_de_perguntas.pop(indice);
+    document.getElementById('status').innerHTML = '<div id="correct">pergunta deletada</div>';
 }
