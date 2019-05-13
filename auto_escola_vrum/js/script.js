@@ -111,6 +111,7 @@ function carregar_lista_jogadores() {
     setTimeout(carregar_jogadores, 50, [1]); //1 para carregar o login
 }
 
+//funcao para carregar o arquivo login.html
 function carregar_login(parametro) {
     httpRequest.open('GET', './arquivos/login.html', true);
     httpRequest.send(null);
@@ -140,12 +141,7 @@ function login(parametro) {
         if(parametro == 0){
         for (var i = 0; i < vetor_de_jogadores.length; i++) {
             if (vetor_de_jogadores[i].email == user_mail && vetor_de_jogadores[i].senha == user_password) {
-                document.getElementById('login_h1').innerHTML = 'Edicao de dados';
-                document.getElementById('input_form').innerHTML = '<input class="input_cadastro" id="user_name" type="text" placeholder="novo nome">' +
-                 '<input class="input_cadastro" id="user_password" type="text" placeholder="nova senha">'+
-                 '<input class="input_cadastro" id="user_mail" type="text" placeholder="novo email">'+
-                 '<input class="button_cadastro" onclick="editar_dados('+ i + ')" value="editar">' + 
-                 '<input id="delete" onclick="deletar_jogador('+ i + ')" value="deletar">';
+                carregar_edicao(i);
             } 
             else {
                 document.getElementById('status').innerHTML = '<div id="error">dados incorretos</div>';
@@ -156,6 +152,16 @@ function login(parametro) {
         carregar_jogo();
     }
     }
+}
+
+//funcao para carregar a edicao de dados
+function carregar_edicao(indice) {
+    document.getElementById('login_h1').innerHTML = 'Edicao de dados';
+    document.getElementById('input_form').innerHTML = '<input class="input_cadastro" id="user_name" type="text" placeholder="novo nome">' +
+     '<input class="input_cadastro" id="user_password" type="text" placeholder="nova senha">'+
+     '<input class="input_cadastro" id="user_mail" type="text" placeholder="novo email">'+
+     '<input class="button_cadastro" onclick="editar_dados('+ indice + ')" value="editar">' + 
+     '<input id="delete" onclick="deletar_jogador('+ indice + ')" value="deletar">';
 }
 
 //funcao para editar os dados
