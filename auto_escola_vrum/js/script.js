@@ -1,7 +1,7 @@
 //variaveis
 var httpRequest; //variavel para o ajax funcionar
 var vetor_de_jogadores = [];
-
+var vetor_de_perguntas = [];
 //verifico a compatibilidade com os navegadores para se executar o ajax
 if (window.XMLHttpRequest) {
     httpRequest = new XMLHttpRequest();
@@ -35,7 +35,7 @@ function carregar_pontos() {
                 document.getElementById("lista_pontuacoes").innerHTML = conteudo + '<li class="pontuacao_item item' + (i + 1) + '"' + ' onclick="carregar_login(0)" >' + vetor_de_jogadores[i].nome + ' ' + vetor_de_jogadores[i].pontos + '</li>';
             } else {
                 console.log('entrou no else');
-                document.getElementById("lista_pontuacoes").innerHTML = conteudo + '<li class="lista_pontuacao_item item_n" onclick="carregar_login(0)">' + vetor_de_jogadores[i].nome + '</li>';
+                document.getElementById("lista_pontuacoes").innerHTML = conteudo + '<li class="lista_pontuacao_item item_n" onclick="carregar_login(0)">' + vetor_de_jogadores[i].nome + ' ' + vetor_de_jogadores[i].pontos + '</li>';
             }
         }
     }
@@ -53,7 +53,7 @@ function carregar_jogadores(parametro) {
         document.getElementById("listagem_h1").innerHTML = 'Sem cadastro de jogadores';
     } else {
         document.getElementById("listagem_h1").innerHTML = 'Jogadores já cadastrados';
-        if(parametro == 0){
+        if (parametro == 0) {
             for (var i = 0; i <= vetor_de_jogadores.length; i++) {
                 var conteudo = document.getElementById("lista_jogadores").innerHTML;
                 if (i < 3) {
@@ -62,8 +62,7 @@ function carregar_jogadores(parametro) {
                     document.getElementById("lista_jogadores").innerHTML = conteudo + '<li class="lista_pontuacao_item item_n" onclick="carregar_login(0)">' + vetor_de_jogadores[i].nome + '</li>';
                 }
             }
-        }
-        else if(parametro == 1){
+        } else if (parametro == 1) {
             for (var i = 0; i <= vetor_de_jogadores.length; i++) {
                 var conteudo = document.getElementById("lista_jogadores").innerHTML;
                 if (i < 3) {
@@ -77,24 +76,54 @@ function carregar_jogadores(parametro) {
 }
 
 //funcao para carregar a pagina cadastro
-function carregar_cadastro() {
-    httpRequest.open('GET', './arquivos/cadastro_jogadores.html', true);
-    httpRequest.send(null);
+function carregar_cadastro(parametro) {
+    if (parametro == 0) {
+        httpRequest.open('GET', './arquivos/cadastro_jogadores.html', true);
+        httpRequest.send(null);
+    } else if (parametro == 1) { 
+        httpRequest.open('GET', './arquivos/cadastro_de_perguntas.html', true);
+        httpRequest.send(null);
+    }
+
 }
 
 //funcao para carregar os dados e criar os novos jogadores
-function enviar_dados() {
-    let user_name = document.getElementById('user_name').value;
-    let user_password = document.getElementById('user_password').value;
-    let user_mail = document.getElementById('user_mail').value;
-    if (user_name.length == 0 || user_password == 0) {} else {
-        let jogador = {
-            'nome': user_name,
-            'senha': user_password,
-            'email': user_mail,
-            'pontos': 0
-        };
-        vetor_de_jogadores.push(jogador);
+function enviar_dados(parametro) {
+    if (parametro == 0) {
+        let user_name = document.getElementById('user_name').value;
+        let user_password = document.getElementById('user_password').value;
+        let user_mail = document.getElementById('user_mail').value;
+        if (user_name.length == 0 || user_password == 0) {} else {
+            let jogador = {
+                'nome': user_name,
+                'senha': user_password,
+                'email': user_mail,
+                'pontos': 0
+            };
+            vetor_de_jogadores.push(jogador);
+        }
+    } else if (parametro == 1) {
+        let per_titulo = document.getElementById('per_titulo').value;
+        let per_desc = document.getElementById('per_desc').value;
+        let per_resp = document.getElementById('per_resp').value;
+        let opcoes = [];
+        opcoes.push(document.getElementById('per_opcao1').value);
+        opcoes.push(document.getElementById('per_opcao2').value);
+        opcoes.push(document.getElementById('per_opcao3').value);
+        opcoes.push(document.getElementById('per_opcao4').value);
+        if(per_titulo.length == 0 || per_desc.length == 0 ||  per_resp.length == 0 || opcoes.length == 0){
+
+        }
+        else {
+            let pergunta = {
+                'titulo': per_titulo,
+                'desc': per_desc,
+                'resp': per_resp,
+                'opcoes': [opcoes[0], opcoes[1], opcoes[2], opcoes[3]
+                ]
+            };
+            vetor_de_perguntas.push(pergunta);
+        }
     }
     setTimeout(carregar_home, 50);
 }
@@ -106,9 +135,29 @@ function carregar_jogo() {
 
 //funcao para carregar a lista de jogadores
 function carregar_lista_jogadores() {
-    httpRequest.open('GET', './arquivos/listagem_jogadores.html', true);
+    httpRequest.open('GET', './arquivos/lista_de_jogadores.html', true);
     httpRequest.send(null);
     setTimeout(carregar_jogadores, 50, [1]); //1 para carregar o login
+}
+
+//funcao para carregar a lista de perguntas
+function carregar_lista_perguntas() {
+    httpRequest.open('GET', './arquivos/lista_de_perguntas.html', true);
+    httpRequest.send(null);
+    setTimeout(carregar_perguntas, 50);
+}
+
+//funcao para carregar as perguntas
+function carregar_perguntas() {
+    if (vetor_de_perguntas.length == 0) {
+        document.getElementById("listagem_h1").innerHTML = 'Sem cadastro de perguntas';
+    } else {
+        document.getElementById("listagem_h1").innerHTML = 'Perguntas já cadastradas';
+        for (var i = 0; i <= vetor_de_perguntas.length; i++) {
+            var conteudo = document.getElementById("lista_perguntas").innerHTML;
+            document.getElementById("lista_perguntas").innerHTML = conteudo + '<li class="lista_perguntas_item" onclick="carregar_edicao_perguntas('+ i +')" >' + vetor_de_perguntas[i].titulo + '</li>';
+        }
+    }
 }
 
 //funcao para carregar o arquivo login.html
@@ -116,19 +165,19 @@ function carregar_login(parametro) {
     httpRequest.open('GET', './arquivos/login.html', true);
     httpRequest.send(null);
     setTimeout(() => {
-     if(parametro == 0){
-         document.getElementById('form').innerHTML ='<form id="input_form" class="formulario" method="GET">'+
-         '<input class="input_cadastro" id="user_mail" type="text" placeholder="digite o seu e-mail">'+
-         '<input class="input_cadastro" id="user_password" type="password" placeholder="digite sua senha">'+
-         '<input class="button_cadastro" onclick="login(1)" value="entrar">'+
-     '</form>'
-     }
-     else if (parametro == 1){
-        document.getElementById('form').innerHTML ='<form id="input_form" class="formulario" method="GET">'+
-        '<input class="input_cadastro" id="user_mail" type="text" placeholder="digite o seu e-mail">'+
-        '<input class="input_cadastro" id="user_password" type="password" placeholder="digite sua senha">'+
-        '<input class="button_cadastro" onclick="login(0)" value="entrar">'+
-    '</form>'     }   
+        if (parametro == 0) {
+            document.getElementById('form').innerHTML = '<form id="input_form" class="formulario" method="GET">' +
+                '<input class="input_cadastro" id="user_mail" type="text" placeholder="digite o seu e-mail">' +
+                '<input class="input_cadastro" id="user_password" type="password" placeholder="digite sua senha">' +
+                '<input class="button_cadastro" onclick="login(1)" value="entrar">' +
+                '</form>'
+        } else if (parametro == 1) {
+            document.getElementById('form').innerHTML = '<form id="input_form" class="formulario" method="GET">' +
+                '<input class="input_cadastro" id="user_mail" type="text" placeholder="digite o seu e-mail">' +
+                '<input class="input_cadastro" id="user_password" type="password" placeholder="digite sua senha">' +
+                '<input class="button_cadastro" onclick="login(0)" value="entrar">' +
+                '</form>'
+        }
     }, 50)
 }
 
@@ -136,36 +185,52 @@ function carregar_login(parametro) {
 function login(parametro) {
     let user_mail = document.getElementById('user_mail').value;
     let user_password = document.getElementById('user_password').value;
-    if (user_mail.length == 0 || user_password == 0) {
-    } else {
-        if(parametro == 0){
-        for (var i = 0; i < vetor_de_jogadores.length; i++) {
-            if (vetor_de_jogadores[i].email == user_mail && vetor_de_jogadores[i].senha == user_password) {
-                carregar_edicao(i);
-            } 
-            else {
-                document.getElementById('status').innerHTML = '<div id="error">dados incorretos</div>';
+    if (user_mail.length == 0 || user_password == 0) {} else {
+        if (parametro == 0) {
+            for (var i = 0; i < vetor_de_jogadores.length; i++) {
+                if (vetor_de_jogadores[i].email == user_mail && vetor_de_jogadores[i].senha == user_password) {
+                    carregar_edicao(i);
+                } else {
+                    document.getElementById('status').innerHTML = '<div id="error">dados incorretos</div>';
+                }
             }
+        } else if (parametro == 1) {
+            carregar_jogo();
         }
-    }
-    else if (parametro == 1) {
-        carregar_jogo();
-    }
     }
 }
 
-//funcao para carregar a edicao de dados
+//funcao para carregar a edicao de dados dos jogadores
 function carregar_edicao(indice) {
     document.getElementById('login_h1').innerHTML = 'Edicao de dados';
     document.getElementById('input_form').innerHTML = '<input class="input_cadastro" id="user_name" type="text" placeholder="novo nome">' +
-     '<input class="input_cadastro" id="user_password" type="text" placeholder="nova senha">'+
-     '<input class="input_cadastro" id="user_mail" type="text" placeholder="novo email">'+
-     '<input class="button_cadastro" onclick="editar_dados('+ indice + ')" value="editar">' + 
-     '<input id="delete" onclick="deletar_jogador('+ indice + ')" value="deletar">';
+        '<input class="input_cadastro" id="user_password" type="text" placeholder="nova senha">' +
+        '<input class="input_cadastro" id="user_mail" type="text" placeholder="novo email">' +
+        '<input class="button_cadastro" onclick="editar_dados_jogadores(' + indice + ')" value="editar">' +
+        '<input id="delete" onclick="deletar_jogador(' + indice + ')" value="deletar">';
 }
 
-//funcao para editar os dados
-function editar_dados(indice) {
+//funcao para a edicao de dados das perguntas
+function carregar_edicao_perguntas(indice){
+    httpRequest.open('GET', './arquivos/edicao_perguntas.html', true);
+    httpRequest.send(null);
+    setTimeout(() => {
+        document.getElementById('edicao_h1').innerHTML = 'Edicao de dados';
+        document.getElementById('form').innerHTML = '<form id="input_form" class="formulario" method="GET">' + 
+        '<input class="input_cadastro" id="per_titulo" type="text" placeholder="novo titulo">' +
+            '<input class="input_cadastro" id="per_desc" type="text" placeholder="nova desc">' +
+            '<input class="input_cadastro" id="per_resp" type="text" placeholder="nova resp">' +
+            '<input class="input_cadastro" id="per_opcao1" type="text" placeholder="nova opcao1">' +
+            '<input class="input_cadastro" id="per_opcao2" type="text" placeholder="nova opcao2">' +
+            '<input class="input_cadastro" id="per_opcao3" type="text" placeholder="nova opcao3">' +
+            '<input class="input_cadastro" id="per_opcao4" type="text" placeholder="nova opcao4">' +
+            '<input class="button_cadastro" onclick="editar_dados_perguntas(' + indice + ')" value="editar">' +
+            '<input id="delete" onclick="deletar_pergunta(' + indice + ')" value="deletar"></form>';
+    }, 100);
+}
+
+//funcao para editar os dados dos jogadores
+function editar_dados_jogadores(indice) {
     let user_name = document.getElementById('user_name').value;
     let user_password = document.getElementById('user_password').value;
     let user_mail = document.getElementById('user_mail').value;
@@ -177,6 +242,32 @@ function editar_dados(indice) {
         vetor_de_jogadores[indice].email = user_mail;
         document.getElementById('status').innerHTML = '<div id="correct">dados atualizados</div>';
     }
+}
+
+//funcao para editar os dados das perguntas
+function editar_dados_perguntas(indice) {
+    let per_titulo = document.getElementById('per_titulo').value;
+        let per_desc = document.getElementById('per_desc').value;
+        let per_resp = document.getElementById('per_resp').value;
+        let per_opcoes = [];
+        per_opcoes.push(document.getElementById('per_opcao1').value);
+        per_opcoes.push(document.getElementById('per_opcao2').value);
+        per_opcoes.push(document.getElementById('per_opcao3').value);
+        per_opcoes.push(document.getElementById('per_opcao4').value);
+        if(per_titulo.length == 0 || per_desc.length == 0 ||  per_resp.length == 0 || per_opcoes.length == 0){
+            document.getElementById('status').innerHTML = '<div id="error">dados invalidos</div>';
+        }
+        else {
+            vetor_de_perguntas[indice].titulo = per_titulo;
+            vetor_de_perguntas[indice].desc = per_desc;
+            vetor_de_perguntas[indice].resp = per_resp;
+            vetor_de_perguntas[indice].opcoes[0] = per_opcoes[0];
+            vetor_de_perguntas[indice].opcoes[1] = per_opcoes[1];
+            vetor_de_perguntas[indice].opcoes[2] = per_opcoes[2];
+            vetor_de_perguntas[indice].opcoes[3] = per_opcoes[3]; 
+        }
+    console.log(vetor_de_perguntas[indice]);
+    carregar_home();
 }
 
 //funcao para deletar um jogador
