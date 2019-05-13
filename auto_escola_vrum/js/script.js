@@ -32,10 +32,10 @@ function carregar_pontos() {
         for (var i = 0; i <= vetor_de_jogadores.length; i++) {
             var conteudo = document.getElementById("lista_pontuacoes").innerHTML;
             if (i < 3) {
-                document.getElementById("lista_pontuacoes").innerHTML = conteudo + '<li class="pontuacao_item item' + (i + 1) + '"' + ' onclick="carregar_login()" >' + vetor_de_jogadores[i].nome + ' ' + vetor_de_jogadores[i].pontos + '</li>';
+                document.getElementById("lista_pontuacoes").innerHTML = conteudo + '<li class="pontuacao_item item' + (i + 1) + '"' + ' onclick="carregar_login(0)" >' + vetor_de_jogadores[i].nome + ' ' + vetor_de_jogadores[i].pontos + '</li>';
             } else {
                 console.log('entrou no else');
-                document.getElementById("lista_pontuacoes").innerHTML = conteudo + '<li class="lista_pontuacao_item item_n" onclick="carregar_login()">' + vetor_de_jogadores[i].nome + '</li>';
+                document.getElementById("lista_pontuacoes").innerHTML = conteudo + '<li class="lista_pontuacao_item item_n" onclick="carregar_login(0)">' + vetor_de_jogadores[i].nome + '</li>';
             }
         }
     }
@@ -57,9 +57,9 @@ function carregar_jogadores(parametro) {
             for (var i = 0; i <= vetor_de_jogadores.length; i++) {
                 var conteudo = document.getElementById("lista_jogadores").innerHTML;
                 if (i < 3) {
-                    document.getElementById("lista_jogadores").innerHTML = conteudo + '<li class="lista_pontuacao_item item' + (i + 1) + '"' + ' onclick="carregar_jogo()" >' + vetor_de_jogadores[i].nome + '</li>';
+                    document.getElementById("lista_jogadores").innerHTML = conteudo + '<li class="lista_pontuacao_item item' + (i + 1) + '"' + ' onclick="carregar_login(0)" >' + vetor_de_jogadores[i].nome + '</li>';
                 } else {
-                    document.getElementById("lista_jogadores").innerHTML = conteudo + '<li class="lista_pontuacao_item item_n" onclick="carregar_jogo()">' + vetor_de_jogadores[i].nome + '</li>';
+                    document.getElementById("lista_jogadores").innerHTML = conteudo + '<li class="lista_pontuacao_item item_n" onclick="carregar_login(0)">' + vetor_de_jogadores[i].nome + '</li>';
                 }
             }
         }
@@ -67,9 +67,9 @@ function carregar_jogadores(parametro) {
             for (var i = 0; i <= vetor_de_jogadores.length; i++) {
                 var conteudo = document.getElementById("lista_jogadores").innerHTML;
                 if (i < 3) {
-                    document.getElementById("lista_jogadores").innerHTML = conteudo + '<li class="lista_pontuacao_item item' + (i + 1) + '"' + ' onclick="carregar_login()" >' + vetor_de_jogadores[i].nome + '</li>';
+                    document.getElementById("lista_jogadores").innerHTML = conteudo + '<li class="lista_pontuacao_item item' + (i + 1) + '"' + ' onclick="carregar_login(1)" >' + vetor_de_jogadores[i].nome + '</li>';
                 } else {
-                    document.getElementById("lista_jogadores").innerHTML = conteudo + '<li class="lista_pontuacao_item item_n" onclick="carregar_login()">' + vetor_de_jogadores[i].nome + '</li>';
+                    document.getElementById("lista_jogadores").innerHTML = conteudo + '<li class="lista_pontuacao_item item_n" onclick="carregar_login(1)">' + vetor_de_jogadores[i].nome + '</li>';
                 }
             }
         }
@@ -111,17 +111,33 @@ function carregar_lista_jogadores() {
     setTimeout(carregar_jogadores, 50, [1]); //1 para carregar o login
 }
 
-function carregar_login() {
+function carregar_login(parametro) {
     httpRequest.open('GET', './arquivos/login.html', true);
     httpRequest.send(null);
+    setTimeout(() => {
+     if(parametro == 0){
+         document.getElementById('form').innerHTML ='<form id="input_form" class="formulario" method="GET">'+
+         '<input class="input_cadastro" id="user_mail" type="text" placeholder="digite o seu e-mail">'+
+         '<input class="input_cadastro" id="user_password" type="password" placeholder="digite sua senha">'+
+         '<input class="button_cadastro" onclick="login(1)" value="entrar">'+
+     '</form>'
+     }
+     else if (parametro == 1){
+        document.getElementById('form').innerHTML ='<form id="input_form" class="formulario" method="GET">'+
+        '<input class="input_cadastro" id="user_mail" type="text" placeholder="digite o seu e-mail">'+
+        '<input class="input_cadastro" id="user_password" type="password" placeholder="digite sua senha">'+
+        '<input class="button_cadastro" onclick="login(0)" value="entrar">'+
+    '</form>'     }   
+    }, 50)
 }
 
 //funcao para fazer o login
-function login() {
+function login(parametro) {
     let user_mail = document.getElementById('user_mail').value;
     let user_password = document.getElementById('user_password').value;
     if (user_mail.length == 0 || user_password == 0) {
     } else {
+        if(parametro == 0){
         for (var i = 0; i < vetor_de_jogadores.length; i++) {
             if (vetor_de_jogadores[i].email == user_mail && vetor_de_jogadores[i].senha == user_password) {
                 document.getElementById('login_h1').innerHTML = 'Edicao de dados';
@@ -135,6 +151,10 @@ function login() {
                 document.getElementById('status').innerHTML = '<div id="error">dados incorretos</div>';
             }
         }
+    }
+    else if (parametro == 1) {
+        carregar_jogo();
+    }
     }
 }
 
