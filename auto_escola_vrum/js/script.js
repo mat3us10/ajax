@@ -138,6 +138,7 @@ function carregar_jogo(indice, inicial) {
     setTimeout(() => {
             document.getElementById('cabecalho_h1').innerHTML = vetor_de_perguntas[inicial].titulo;
             document.getElementById('cabecalho_p').innerHTML = vetor_de_perguntas[inicial].desc;
+            document.getElementById('opcoes').innerHTML = '';
             for(var j = 0; j < vetor_de_perguntas[inicial].opcoes.length; j++){
                 conteudo = document.getElementById('opcoes').innerHTML;
                 document.getElementById('opcoes').innerHTML = conteudo + '<a onclick="(verifica('+ inicial + ',' + j + ',' + indice + '))"> <div class="opcao" id="opcao1">'+
